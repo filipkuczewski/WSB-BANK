@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if((!isset($_POST['login'])) || (!isset($_POST['haslo']))){
+    header('Location: index.php');
+    exit();
+}
 
 require_once "connect.php";
 
@@ -18,16 +24,27 @@ else{
     if($rezultat = @$polaczenie->query($sql)){
         $ilu_userow = $rezultat->num_rows;;
         if($ilu_userow>0){
+
+            $_SESSION['zalogowany'] = true;
+            
             $wiersz = ($rezultat)->fetch_assoc();
-            $user = $wiersz['user'];
+            $_SESSION['id'] = $wiersz['id'];
+            $_SESSION['user'] = $wiersz['user'];
+            $_SESSION['drewno'] = $wiersz['drewno'];
+            $_SESSION['kamien'] = $wiersz['kamien'];
+            $_SESSION['zboze'] = $wiersz['zboze'];
+            $_SESSION['email'] = $wiersz['email'];
+            $_SESSION['dnipremium'] = $wiersz['dnipremium'];
 
+            
 
+            unset($_SESSION['blad']);
             $rezultat->free_result();
-
-            echo "hello ".$user;
+            header('Location: gra.php');
 
         }else{
-            echo "It not works!";
+            $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło</span>';
+            header('Location: index.php');
         }
        
     } else{
