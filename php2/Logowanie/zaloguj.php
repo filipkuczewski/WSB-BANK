@@ -34,10 +34,7 @@ if ($polaczenie->connect_errno != 0) {
 
             if (password_verify($haslo, $wiersz['pass'])) {
 
-
-
                 $_SESSION['zalogowany'] = true;
-
 
                 $_SESSION['id'] = $wiersz['id'];
                 $_SESSION['user'] = $wiersz['user'];
@@ -46,8 +43,6 @@ if ($polaczenie->connect_errno != 0) {
                 $_SESSION['zboze'] = $wiersz['zboze'];
                 $_SESSION['email'] = $wiersz['email'];
                 $_SESSION['dnipremium'] = $wiersz['dnipremium'];
-
-
 
                 unset($_SESSION['blad']);
                 $rezultat->free_result();

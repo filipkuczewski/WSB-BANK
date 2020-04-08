@@ -54,20 +54,72 @@ if (isset($_POST['email'])) {
     //Bot or not? Oto jest pytanie!
     $sekret = "6LcOyecUAAAAABMNlLLvYw2dMTbW7BkQShDi3ZrY";
 
-    $sprawdz = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$sekret.'&response=' .$_POST['g-recaptcha-response']);
+    $sprawdz = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $sekret . '&response=' . $_POST['g-recaptcha-response']);
 
     $odpowiedz = json_decode($sprawdz);
 
-    if($odpowiedz->success == false){
+    if ($odpowiedz->success == false) {
         $wszystko_ok = false;
         $_SESSION['e_bot'] = "Potwierdź, że nie jesteś botem!";
     }
+    //Zapamiętaj wprowadzone dane
+    $_SESSION['fr_nick'] = $nick;
+    $_SESSION['fr_email'] = $email;
+    $_SESSION['fr_haslo1'] = $haslo1;
+    $_SESSION['fr_haslo2'] = $haslo2;
+    if (isset($_POST['regulamin'])) $_SESSION['fr_regulamin'] = true;
 
-    if ($wszystko_ok == true) {
+    require_once "connect.php";
+    mysqli_report(MYSQLI_REPORT_STRICT);
+    try {
 
-        //Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
-        echo "Udana walidacja!";
-        exit();
+        $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
+        if ($polaczenie->connect_errno != 0) {
+            throw new Exception(mysqli_connect_errno());
+        } else {
+
+            //Czy email już istnieje?
+            $rezultat = $polaczenie->query("Select id from uzytkownicy where email='$email'");
+
+            if (!$rezultat) throw new Exception($polaczenie->error);
+
+            $ile_takich_maili = $rezultat->num_rows;
+
+            if ($ile_takich_maili > 0) {
+                $wszystko_ok = false;
+                $_SESSION['e_email'] = "Istnieje już konto przypisane do adresu e-mail!";
+            }
+
+            //Czy nick już istnieje?
+            $rezultat = $polaczenie->query("Select id from uzytkownicy where user='$nick'");
+
+            if (!$rezultat) throw new Exception($polaczenie->error);
+
+            $ile_takich_nickow = $rezultat->num_rows;
+
+            if ($ile_takich_nickow > 0) {
+                $wszystko_ok = false;
+                $_SESSION['e_nick'] = "Istnieje już gracz o takim nicku! Wybierz inny.";
+            }
+
+
+            if ($wszystko_ok == true) {
+
+                //Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
+                if ($polaczenie->query("Insert into uzytkownicy values (NULL,'$nick','$haslo_hash','$email',100,100,100, 14)")) {
+                    $_SESSION['udanarejestracja'] = true;
+                    header('Location: witamy.php');
+                } else {
+                    throw new Exception($polaczenie->error);
+                }
+            }
+
+
+            $polaczenie->close();
+        }
+    } catch (Exception $e) {
+        echo '<span style="color:red;">Błąd serwera, przepraszamy za niedogodności i prosimy o rejestrację w innym terminie.</span>';
+        echo '</br>Informacja deweloperska: ' . $e;
     }
 }
 
@@ -96,7 +148,12 @@ if (isset($_POST['email'])) {
 <body>
     <form method="post">
 
-        Nickname: </br><input type="text" name="nick" /></br>
+        Nickname: </br><input type="text" value="<?php
+                                                    if (isset($_SESSION['fr_nick'])) {
+                                                        echo $_SESSION['fr_nick'];
+                                                        unset($_SESSION['fr_nick']);
+                                                    }
+                                                    ?>" name="nick" /></br>
 
         <?php
         if (isset($_SESSION['e_nick'])) {
@@ -105,7 +162,12 @@ if (isset($_POST['email'])) {
         }
         ?>
 
-        E-mail: </br><input type="text" name="email" /></br>
+        E-mail: </br><input type="text" value="<?php
+                                                if (isset($_SESSION['fr_email'])) {
+                                                    echo $_SESSION['fr_email'];
+                                                    unset($_SESSION['fr_email']);
+                                                }
+                                                ?>" name="email" /></br>
 
         <?php
         if (isset($_SESSION['e_email'])) {
@@ -113,7 +175,12 @@ if (isset($_POST['email'])) {
             unset($_SESSION['e_email']);
         }
         ?>
-        Twoje hasło: </br><input type="password" name="haslo1" /></br>
+        Twoje hasło: </br><input type="password" value="<?php
+                                                        if (isset($_SESSION['fr_haslo1'])) {
+                                                            echo $_SESSION['fr_haslo1'];
+                                                            unset($_SESSION['fr_haslo1']);
+                                                        }
+                                                        ?>" name="haslo1" /></br>
 
         <?php
         if (isset($_SESSION['e_haslo'])) {
@@ -122,8 +189,22 @@ if (isset($_POST['email'])) {
         }
         ?>
 
-        Powtórz hasło: </br><input type="password" name="haslo2" /></br>
-        <label><input type="checkbox" name="regulamin" />Akceptuję regulamin</label>
+        Powtórz hasło: </br><input type="password" value="<?php
+                                                            if (isset($_SESSION['fr_haslo2'])) {
+                                                                echo $_SESSION['fr_haslo2'];
+                                                                unset($_SESSION['fr_haslo2']);
+                                                            }
+                                                            ?>" name="haslo2" /></br>
+
+
+        <label>
+            <input type="checkbox" name="regulamin" <?php
+                                                    if (isset($_SESSION['fr_regulamin'])) {
+                                                        echo "checked";
+                                                        unset($_SESSION['fr_regulamin']);
+                                                    }
+                                                    ?> />Akceptuję regulamin
+        </label>
         </br>
         <?php
         if (isset($_SESSION['e_regulamin'])) {
