@@ -1,0 +1,1 @@
+Blog powiązany z cssem fb twitter itp kafelki w css
