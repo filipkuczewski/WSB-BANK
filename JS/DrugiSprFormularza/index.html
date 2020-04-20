@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="text/javascript">
+        function sprawdz() {
+            var liczba = document.getElementById("pole").value;
+            if (liczba > 0) document.getElementById("wynik").innerHTML = "dodatnia";
+            else if (liczba < 0) document.getElementById("wynik").innerHTML = "ujemna";
+            else if (liczba == "") document.getElementById("wynik").innerHTML = "Nie podałeś liczby";
+            else if (liczba == 0) document.getElementById("wynik").innerHTML = "zero";
+            else document.getElementById("wynik").innerHTML = liczba + " to nie jest liczba";
+        }
+
+        function wypisz(){
+            
+            var liczba1 = document.getElementById("liczbaMin").value;
+            if(isNaN(liczba1)){
+                document.getElementById("wypisanie").innerHTML = "Podaj liczbę w polu 1";
+                document.getElementById("liczbaMin").focus();
+            } 
+            var liczba2 = document.getElementById("liczbaMax").value;
+            if(isNaN(liczba2)){
+                document.getElementById("wypisanie").innerHTML = "Podaj liczbę w polu 2";
+                document.getElementById("liczbaMax").focus();
+            } 
+            var napis ="";
+            for(i=liczba1; i<=liczba2; i++){
+                napis= napis + i + " ";
+            }
+            //document.getElementById("wypisanie").innerHTML = napis;
+        }
+    </script>
+</head>
+
+<body>
+
+    <input type="text" id="pole" />
+    <input type="submit" value="Sprawdź" onclick="sprawdz();" />
+    <div id="wynik"></div>
+
+    <input type="text" id="liczbaMin" />
+    <input type="text" id="liczbaMax" />
+    <input type="submit" value="wypis" onclick="wypisz();" />
+    <div id="wypisanie"></div>
+</body>
+
+</html>
