@@ -1,0 +1,312 @@
+body {
+	background-image: url(chmury.jpg);
+	margin: 0;
+}
+div.logo {
+	letter-spacing: 2px;
+	width: 80%;
+	background: #000;
+	text-align: center;
+	color: honeydew;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 40px;
+	font-weight: 700;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-position: center;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+/*Nawigacja Menu : Bez Logowania */
+.topnav {
+	width: 80%;
+	display: block;
+	background-position: center;
+	background-color: #999884;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+	
+}
+.menu {
+	list-style-type: none;
+	padding: 10px;
+	font-size: 18px;
+	min-height: 38px;
+	line-height: 200%;
+	display: inline-block; /*Jak do lewej to float:left; */
+}
+
+.menu a {
+	text-decoration: none;
+	color: white;
+	list-style-type: none;
+	display: block;
+}
+
+.menu a:hover {
+	color: #0a2b42;
+}
+.menu > li {
+	float: left;
+	width: 150px;
+	border-right: 1px dashed #0a2b42;
+}
+.menu > li:first-child {
+	border-left: 1px dashed #0a2b42;
+}
+.menu > li:last-child {
+	border-right: 1px dashed #555443;
+}
+#sylwia {
+	background-color: violet;
+	float: left;
+}
+img {
+	float: left;
+}
+
+.sticky {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}
+
+/*... Style navbara listy rozwijanej...*/
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 18px;
+	height: 35px;
+	line-height: 200%;
+	display: inline-block;
+}
+ul a {
+	color: white;
+	text-decoration: none;
+	display: block;
+}
+ul > li {
+	float: left;
+	width: 150px;
+	height: 40px;
+	border-right: 1px dashed #999884;
+}
+ul > li:first-child {
+	border-left: 1px dashed #999884;
+}
+ul > li:hover {
+	background-color: #aaa995;
+}
+ul > li:hover > a {
+	color: #777662;
+}
+ul > li > ol {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	height: 40px;
+	display: none;
+}
+ul > li:hover > ol {
+	display: block;
+}
+
+ul > li > ol > li {
+	background-color: #998b84;
+	position: relative;
+	z-index: 100;
+	border-top: 1px dashed #751b1b;
+}
+ul > li > ol > li:hover {
+	background-color: #aaa995;
+}
+ul > li > ol > li:hover > a {
+	color: #451717;
+}
+/*...Koniec styli navbara listy rozwijanej*/
+
+/*... Ciało strony jakieś kafelki ...*/
+
+.tloTest {
+	font-weight: 400;
+	display: block;
+	background-image: url(black-1072366_1920.jpg);
+	margin-left: auto;
+	color: white;
+	margin-right: auto;
+	background-position: center;
+	width: 80%;
+	height: 800px;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 20px;
+	position: relative;
+	z-index: 1;
+
+	box-shadow: 3px 3px 30px 5px rgba(19, 16, 16, 0.9);
+	-webkit-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+}
+.tloTest2 {
+	font-weight: 400;
+	display: block;
+	background-image: url(jasne.jpg);
+	margin-left: auto;
+	color: black;
+	margin-right: auto;
+	background-position: center;
+	width: 80%;
+	height: 800px;
+	border-radius: 20px;
+	padding: 20px;
+
+	box-shadow: 3px 3px 30px 5px rgba(19, 16, 16, 0.9);
+	-webkit-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+}
+
+.tloPuste {
+	height: 100px;
+}
+.tloPuste2 {
+	height: 200px;
+}
+
+/*...Koniec ciała strony, jakiś kafelków...*/
+
+/* ...Style trzech przycisków w środkowej części strony głównej...*/
+.przycisk {
+	font-weight: 700;
+	display: block;
+	margin-top: 5px;
+	margin-right: 5px;
+	background-color: black;
+	color: wheat;
+	text-align: center;
+	background-position: center;
+	width: 12%;
+	height: 200px;
+	border-radius: 20px;
+	position: absolute;
+	left: 15%;
+	top: 900px;
+	padding: 20px;
+	z-index: 2;
+
+	box-shadow: 3px 3px 30px 5px rgba(19, 16, 16, 0.9);
+	-webkit-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+}
+.przycisk1 {
+	font-weight: 700;
+	margin-top: 5px;
+	margin-right: 5px;
+	background-color: black;
+	color: wheat;
+	text-align: center;
+	background-position: center;
+	width: 12%;
+	height: 200px;
+	border-radius: 20px;
+	position: absolute;
+	left: 40%;
+	top: 900px;
+	padding: 20px;
+	z-index: 2;
+
+	box-shadow: 3px 3px 30px 5px rgba(19, 16, 16, 0.9);
+	-webkit-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+}
+.przycisk2 {
+	font-weight: 700;
+	margin-top: 5px;
+	margin-right: 5px;
+	background-color: black;
+	color: wheat;
+	text-align: center;
+	background-position: center;
+	width: 12%;
+	height: 200px;
+	border-radius: 20px;
+	position: absolute;
+	left: 65%;
+	top: 900px;
+	padding: 20px;
+	z-index: 2;
+
+	box-shadow: 3px 3px 30px 5px rgba(19, 16, 16, 0.9);
+	-webkit-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px (19, 16, 16, 0.9);
+}
+/*...Koniec styli przycisków...*/
+
+/*...STOPKA...   --   Socialmedia facebook, twitter, gmail... + ...wszystko zastrzeżone*/
+
+.socials {
+	width: 100%;
+	color: wheat;
+	text-align: center;
+	background-color: #191d21;
+}
+.socialdivs {
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.fb {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
+.fb:hover {
+	background-color: #4668b3;
+	border-radius: 10px;
+}
+.yt {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
+.yt:hover {
+	background-color: #d94348;
+	border-radius: 10px;
+}
+.tw {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
+.tw:hover {
+	background-color: #3095d3;
+	border-radius: 10px;
+}
+
+.info {
+	border-top: 1px solid white;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	color: wheat;
+	background-color: black;
+	padding: 20px;
+}
+
+/*...Koniec : ...STOPKA... oraz ...Socialmedia...*/
+
+/*...index.php style ...*/
+.glownyPanel {
+	border-top: 11px solid white;
+	border-bottom: 11px solid white;
+}
